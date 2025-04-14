@@ -284,6 +284,27 @@ app.post("api/payment_methods", (req, res) => {
     res.status(200).send(payment_method);
 })
 
+app.post("api/items", (req, res) => {
+    const result = validateItem(req.body);
+
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+
+    const item = {
+        item_id: items.length + 1,
+        item_name: req.body.item_name,
+        price: req.body.price,
+        description: req.body.description,
+        best_seller: req.body.best_seller,
+        newest_arrival: req.body.newest_arrival,
+        collectionType: req.body.collectionType
+    }
+
+    items.push(item);
+    res.status(200).send(item);
+})
 
 
 const validatePaymentMethod = (payment_method) => {
@@ -295,4 +316,26 @@ const validatePaymentMethod = (payment_method) => {
     })
 
     return schema.validate(payment_method)
+}
+
+const validateItem = (item) => {
+    const schema = Joi.object({
+        item_id: items.length + 1,
+        item_name: Joi.string().required(),
+        item_page: item_name + ".html",
+        price: Joi.number().required(),
+        sizes: [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        description: Joi.string().required(),
+        best_seller: Joi.bool(),
+        newest_arrival: Joi.bool(),
+        collectionType: Joi.string()
+    })
+
+    return schema.validate(item)
 }
