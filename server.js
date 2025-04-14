@@ -13,6 +13,182 @@ app.get('/', (req, res) => {
     res.sendFile(_dirname + "/index.html");
 })
 
+let items = [
+    {
+        "item_id": 1,
+        "item_name": "Black Jacket",
+        "item_page": "jacket.html",
+        "price": 80.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "black-jacket.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false,
+        "collectionType": "black"
+    },
+    {
+        "item_id": 2,
+        "item_name": "Sweatshirt",
+        "item_page": "sweatshirt.html",
+        "price": 40.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "sweatshirt-aba.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false,
+        "collectionType": "black"
+    },
+    {
+        "item_id": 3,
+        "item_name": "Black Hoodie",
+        "item_page": "black-hoodie.html",
+        "price": 65.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "hoodie-black.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false,
+        "collectionType": "black"
+    },
+    {
+        "item_id": 4,
+        "item_name": "Zip-Up",
+        "item_page": "zip-up.html",
+        "price": 89.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "zip-up.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false,
+        "collectionType": "black"
+    },
+    {
+        "item_id": 5,
+        "item_name": "Jeans",
+        "item_page": "jeans.html",
+        "price": 70.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "aba-jeans.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false
+    },
+    {
+        "item_id": 6,
+        "item_name": "Joggers",
+        "item_page": "joggers.html",
+        "price": 45.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "aba-joggers.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": true,
+        "newest_arrival": false
+    },
+    {
+        "item_id": 7,
+        "item_name": "T-Shirt 1.0",
+        "item_page": "t-shirt-1.html",
+        "price": 40.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "t-shirt-design-1.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": false,
+        "newest_arrival": true
+    },
+    {
+        "item_id": 8,
+        "item_name": "T-Shirt 2.0",
+        "item_page": "t-shirt-2.html",
+        "price": 42.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "t-shirt-design-2.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": false,
+        "newest_arrival": true
+    },
+    {
+        "item_id": 9,
+        "item_name": "T-Shirt 3.0",
+        "item_page": "t-shirt-3.html",
+        "price": 45.00,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "img_name": "t-shirt-design-3.jpg",
+        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
+        "best_seller": false,
+        "newest_arrival": true
+    }
+]
+
+let payment_methods = [
+    {
+        "payment_type": "visa",
+        "card_number": "4111111111111234",
+        "card_holder_name": "Victor Nguyen",
+        "exp": "12/26"
+    },
+    {
+        "payment_type": "amex",
+        "card_number": "4111111111114321",
+        "card_holder_name": "Victor Nguyen",
+        "exp": "10/27"
+    }
+]
+
+
 let accounts = {
     "accounts": [
         {
@@ -74,6 +250,14 @@ let accounts = {
 
 app.get("/api/accounts", (req, res) => {
     res.send(accounts);
+});
+
+app.get("/api/payment_methods", (req, res) => {
+    res.send(payment_methods);
+});
+
+app.get("/api/items", (req, res) => {
+    res.send(items);
 });
 
 // listening whatever request
