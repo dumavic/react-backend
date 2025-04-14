@@ -265,3 +265,34 @@ app.listen(3001, () => {
     console.log("Im listening")
 })
 
+app.post("api/payment_methods", (req, res) => {
+    const result = validatePaymentMethod(req.body);
+
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+
+    const payment_method = {
+        payment_type: req.body.payment_type,
+        card_number: req.body.card_number,
+        card_holder_name: req.body.card_holder_name,
+        exp: req.body.exp
+    }
+
+    payment_methods.push(payment_method);
+    res.status(200).send(payment_method);
+})
+
+
+
+const validatePaymentMethod = (payment_method) => {
+    const schema = Joi.object({
+        payment_type: Joi.string().required(),
+        card_number: Joi.string().min(16).required(),
+        card_holder_name: Joi.string().min(1).required(),
+        exp: Joi.string().required()
+    })
+
+    return schema.validate(payment_method)
+}
