@@ -15,163 +15,110 @@ app.get('/', (req, res) => {
 
 let items = [
     {
-        "item_id": 1,
-        "item_name": "Black Jacket",
-        "item_page": "jacket.html",
-        "price": 80.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "black-jacket.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false,
-        "collectionType": "black"
+        item_id: 1,
+        item_name: "Black Jacket",
+        item_page: "jacket.html",
+        price: 80.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "black-jacket.jpg",
+        description: "Statement piece with embroidered koi-dragon art. Bold, sleek, and symbolic.",
+        best_seller: true,
+        newest_arrival: false,
+        collectionType: "black"
     },
     {
-        "item_id": 2,
-        "item_name": "Sweatshirt",
-        "item_page": "sweatshirt.html",
-        "price": 40.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "sweatshirt-aba.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false,
-        "collectionType": "black"
+        item_id: 2,
+        item_name: "Sweatshirt",
+        item_page: "sweatshirt.html",
+        price: 40.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "sweatshirt-aba.jpg",
+        description: "Relaxed fit with legacy design—perfect for everyday cool.",
+        best_seller: true,
+        newest_arrival: false,
+        collectionType: "black"
     },
     {
-        "item_id": 3,
-        "item_name": "Black Hoodie",
-        "item_page": "black-hoodie.html",
-        "price": 65.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "hoodie-black.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false,
-        "collectionType": "black"
+        item_id: 3,
+        item_name: "Black Hoodie",
+        item_page: "black-hoodie.html",
+        price: 65.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "hoodie-black.jpg",
+        description: "Street-ready hoodie featuring the koi's rise—warm and powerful.",
+        best_seller: true,
+        newest_arrival: false,
+        collectionType: "black"
     },
     {
-        "item_id": 4,
-        "item_name": "Zip-Up",
-        "item_page": "zip-up.html",
-        "price": 89.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "zip-up.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false,
-        "collectionType": "black"
+        item_id: 4,
+        item_name: "Zip-Up",
+        item_page: "zip-up.html",
+        price: 89.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "zip-up.jpg",
+        description: "Sleek zip-up with minimalist front and story-driven back art.",
+        best_seller: true,
+        newest_arrival: false,
+        collectionType: "black"
     },
     {
-        "item_id": 5,
-        "item_name": "Jeans",
-        "item_page": "jeans.html",
-        "price": 70.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "aba-jeans.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false
+        item_id: 5,
+        item_name: "Jeans",
+        item_page: "jeans.html",
+        price: 70.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "aba-jeans.jpg",
+        description: "Structured denim with symbolic stitchwork—effortlessly raw.",
+        best_seller: true,
+        newest_arrival: false
     },
     {
-        "item_id": 6,
-        "item_name": "Joggers",
-        "item_page": "joggers.html",
-        "price": 45.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "aba-joggers.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": true,
-        "newest_arrival": false
+        item_id: 6,
+        item_name: "Joggers",
+        item_page: "joggers.html",
+        price: 45.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "aba-joggers.jpg",
+        description: "Comfort meets meaning—tapered joggers with a deeper story.",
+        best_seller: true,
+        newest_arrival: false
     },
     {
-        "item_id": 7,
-        "item_name": "T-Shirt 1.0",
-        "item_page": "t-shirt-1.html",
-        "price": 40.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "t-shirt-design-1.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": false,
-        "newest_arrival": true
+        item_id: 7,
+        item_name: "T-Shirt 1.0",
+        item_page: "t-shirt-1.html",
+        price: 40.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "t-shirt-design-1.jpg",
+        description: "Clean, simple, and bold—modern storytelling in monochrome.",
+        best_seller: false,
+        newest_arrival: true
     },
     {
-        "item_id": 8,
-        "item_name": "T-Shirt 2.0",
-        "item_page": "t-shirt-2.html",
-        "price": 42.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "t-shirt-design-2.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": false,
-        "newest_arrival": true
+        item_id: 8,
+        item_name: "T-Shirt 2.0",
+        item_page: "t-shirt-2.html",
+        price: 42.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "t-shirt-design-2.jpg",
+        description: "Second-gen tee with refined koi art—made to turn heads.",
+        best_seller: false,
+        newest_arrival: true
     },
     {
-        "item_id": 9,
-        "item_name": "T-Shirt 3.0",
-        "item_page": "t-shirt-3.html",
-        "price": 45.00,
-        "sizes": [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-        "img_name": "t-shirt-design-3.jpg",
-        "description": "This is a Jacket that is designed based off of the Asian folklore of the koi and the dragon. The koi represents struggle and adversity, striving for greatness and one day turning into a dragon. The jacket is black with ABA origin story design on the back.",
-        "best_seller": false,
-        "newest_arrival": true
+        item_id: 9,
+        item_name: "T-Shirt 3.0",
+        item_page: "t-shirt-3.html",
+        price: 45.00,
+        sizes: ["XS", "S", "M", "L", "XL"],
+        img_name: "t-shirt-design-3.jpg",
+        description: "Evolved design with bolder lines—where myth meets minimal.",
+        best_seller: false,
+        newest_arrival: true
     }
-]
+];
+
 
 let payment_methods = [
     {
