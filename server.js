@@ -120,6 +120,7 @@ let items = [
 ];
 
 
+
 let payment_methods = [
     {
         "payment_type": "visa",
