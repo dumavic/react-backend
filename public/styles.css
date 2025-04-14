@@ -1,0 +1,41 @@
+/* General Styling Boilerplate */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #021424;
+    --black: #000000;
+    --tinted-black: #222222;
+    --dark-gray: #555555;
+    --almost-white: #f1f1f1;
+    --white: #ffffff;
+    --pale-gray: #d1d1d1;
+    --bold-blue: #2853af;
+}
+
+body {
+    font-family: Courier, Arial, Helvetica, sans-serif, sans-serif;
+    background: var(--white);
+}
+
+/* Reset lists styling */
+menu:not(article menu),
+ol:not(article ol),
+ul:not(article ul) {
+    list-style: none;
+}
+/* Remove padding */
+menu,
+ol,
+ul {
+    padding-left: 0;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    cursor: auto;
+  }
+
+  
