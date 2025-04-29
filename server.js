@@ -2,11 +2,25 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const Joi = require("joi");
-const multer = require("multer");
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 app.use(cors());
+const multer = require("multer");
+const path = require("path");
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // The folder where files will be saved
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + path.extname(file.originalname);
+        cb(null, file.fieldname + "-" + uniqueSuffix); // Filename with unique suffix
+    }
+});
+
+const upload = multer({ storage: storage });
 
 // getting the request and the response
 app.get('/', (req, res) => {
@@ -119,8 +133,6 @@ let items = [
     }
 ];
 
-
-
 let payment_methods = [
     {
         "payment_type": "visa",
@@ -135,7 +147,6 @@ let payment_methods = [
         "exp": "10/27"
     }
 ]
-
 
 let accounts = {
     "accounts": [
@@ -213,7 +224,7 @@ app.listen(3001, () => {
     console.log("Im listening")
 })
 
-app.post("api/payment_methods", (req, res) => {
+app.post("/api/payment_methods", (req, res) => {
     const result = validatePaymentMethod(req.body);
 
     if (result.error) {
@@ -232,28 +243,6 @@ app.post("api/payment_methods", (req, res) => {
     res.status(200).send(payment_method);
 })
 
-app.post("api/items", (req, res) => {
-    const result = validateItem(req.body);
-
-    if (result.error) {
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
-
-    const item = {
-        item_id: items.length + 1,
-        item_name: req.body.item_name,
-        price: req.body.price,
-        description: req.body.description,
-        best_seller: req.body.best_seller,
-        newest_arrival: req.body.newest_arrival,
-        collectionType: req.body.collectionType
-    }
-
-    items.push(item);
-    res.status(200).send(item);
-})
-
 
 const validatePaymentMethod = (payment_method) => {
     const schema = Joi.object({
@@ -266,24 +255,81 @@ const validatePaymentMethod = (payment_method) => {
     return schema.validate(payment_method)
 }
 
+
+app.post("/api/items", upload.single("img_name"), (req, res) => {
+    const result = validateItem(req.body);
+
+    if (result.error) {
+        console.log("Validation error:", result.error.details);
+        return res.status(400).send(result.error.details[0].message);
+    }
+
+    const item = {
+        item_id: items.length + 1,
+        item_name: req.body.item_name,
+        item_page: req.body.item_name.toLowerCase().replace(/\s+/g, '-') + ".html",
+        price: parseFloat(req.body.price),
+        sizes: ["XS", "S", "M", "L", "XL"], // Or pull from req.body if needed
+        img_name: req.file ? req.file.filename : "",
+        description: req.body.description,
+        best_seller: req.body.best_seller === "on",
+        newest_arrival: req.body.newest_arrival === "on",
+        collectionType: req.body.collectionType || ""
+    };
+
+    items.push(item);
+    res.status(200).send(item);
+});
+
+app.put("/api/items/:id", upload.single("img_name"), (req, res) => {
+    let item = items.find((i) => i.item_id === parseInt(req.params.id));
+
+    if (!item) res.status(400).send("Item with given id was not found");
+
+    const result = validateItem(req.body);
+
+    if(result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+
+    if (req.file) {
+        item.img_name = "uploads/" + req.file.filename;
+    }
+    
+    item_name = req.body.item_name;
+    item_page = req.body.item_name.toLowerCase().replace(/\s+/g, '-') + ".html";
+    price = parseFloat(req.body.price);
+    sizes = ["XS", "S", "M", "L", "XL"];
+    description =  req.body.description;
+    best_seller = req.body.best_seller;
+    newest_arrival = req.body.newest_arrival;
+    collectionType = req.body.collectionType;
+
+    res.send(item);
+})
+
+app.delete("/api/items/:id", (req, res) => {
+    const item = items.find((i) => i.item_id === parseInt(req.params.id));
+  
+    if (!item) {
+      res.status(404).send("The item with the given id was not found");
+    }
+  
+    const index = items.indexOf(item);
+    items.splice(index, 1);
+    res.send(item);
+  });
+
 const validateItem = (item) => {
     const schema = Joi.object({
-        item_id: items.length + 1,
         item_name: Joi.string().required(),
-        item_page: item_name + ".html",
         price: Joi.number().required(),
-        sizes: [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
         description: Joi.string().required(),
-        best_seller: Joi.bool(),
-        newest_arrival: Joi.bool(),
-        collectionType: Joi.string()
-    })
+        best_seller: Joi.any(), // because checkbox = 'on' string
+        newest_arrival: Joi.any(),
+        collectionType: Joi.string().allow('')
+    });
 
-    return schema.validate(item)
-}
+    return schema.validate(item);
+};
